@@ -78,7 +78,19 @@ class Cst {
 			} catch (Exception $e) {
 				CST_Page::$messages[] = 'Cloudfiles connection error, please check details.';
 			}
-		} else if ($this->connectionType == 'WebDAV') {
+		} else if ($this->connectionType == 'e24files') {
+			
+			require_once CST_DIR.'lib/api/S3.php';
+			$awsAccessKey = get_option('cst-s3-username');
+			$awsSecretKey = get_option('cst-s3-api');
+			$this->cdnConnection = new S3($awsAccessKey, $awsSecretKey, false, 'e24files.com');
+			
+			if (@$this->cdnConnection->listBuckets() === false) {
+				CST_Page::$messages[] = 'e24files connection error, please check details.';
+			}			
+			
+		}
+		else if ($this->connectionType == 'WebDAV') {
 			require_once CST_DIR.'lib/api/webdav/Sabre/autoload.php';
 			$settings = array(
 				'baseUri' => get_option('cst-webdav-host'),
@@ -139,7 +151,7 @@ class Cst {
 				// Uploads files
 				ftp_put($this->cdnConnection, $filename, $file, FTP_ASCII);
 			}
-		} else if ($this->connectionType == 'Cloudfiles') {
+		} else if ($this->connectionType == 'Cloudfiles' ) {
 			require CST_DIR.'etc/mime.php';
 			$object = $this->cdnConnection->create_object($remotePath);
 			$extension = pathinfo($file, PATHINFO_EXTENSION);
@@ -162,6 +174,15 @@ class Cst {
 				$currentPath .= '/'.$path;
 			}
 			$this->cdnConnection->request('PUT', get_option('cst-webdav-basedir').'/'.$remotePath, file_get_contents($file));
+		} else if ($this->connectionType == 'e24files') {
+			// Puts a file to the bucket
+			// putObjectFile(localName, bucketName, remoteName, ACL)
+			$bucketName = get_option('cst-cf-container');
+			$buckets = $this->cdnConnection->listBuckets();
+			if (!in_array($bucketName, $buckets)) {
+				$this->cdnConnection->putBucket($bucketName);
+			}
+			$this->cdnConnection->putObjectFile($file, $bucketName, $remotePath, S3::ACL_PUBLIC_READ);
 		}
 	}
 
@@ -450,7 +471,7 @@ class Cst {
 			$di = new RecursiveDirectoryIterator($dir);
 
 			foreach (new RecursiveIteratorIterator($di) as $filename => $file) {
-				if (preg_match('$\.(css|js|jpe?g|gif|png)$', $filename)) {
+				if (preg_match('$\.(css|js|jpe?g|gif|png|woff|ttf|xml)$', $filename)) {
 					$files[] = $filename;
 				}
 			}

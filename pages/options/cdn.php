@@ -9,6 +9,7 @@
 							<option value="S3" <?php if (isset(self::$options['cst-cdn']) && self::$options['cst-cdn'] == 'S3') { echo 'selected="selected"'; } ?>>Amazon S3</option>
 							<option value="FTP" <?php if (isset(self::$options['cst-cdn']) && self::$options['cst-cdn'] == 'FTP') { echo 'selected="selected"'; } ?>>(S)FTP</option>
 							<option value="Cloudfiles" <?php if (isset(self::$options['cst-cdn']) && self::$options['cst-cdn'] == 'Cloudfiles') { echo 'selected="selected"'; } ?>>Cloudfiles</option>
+							<option value="e24files" <?php if (isset(self::$options['cst-cdn']) && self::$options['cst-cdn'] == 'e24files') { echo 'selected="selected"'; } ?>>e24files</option>
 							<option value="WebDAV" <?php if (isset(self::$options['cst-cdn']) && self::$options['cst-cdn'] == 'WebDAV') { echo 'selected="selected"'; } ?>>WebDAV</option>
 							<option value="Origin" <?php if (isset(self::$options['cst-cdn']) && self::$options['cst-cdn'] == 'Origin') { echo 'selected="selected"'; } ?>>NetDNA/MaxCDN/Origin Pull</option>
 						</select>
@@ -99,6 +100,24 @@
 				</tbody>
 			</table>
 
+			<table class="form-table e24files">
+				<tbody>
+					<tr valign="top">
+						<th scope="row"><label for="cf-username">Api Id</label></th>
+						<td><input type="text" name="options[cst-e24-username]" id="cf-username" <?php if (isset(self::$options['cst-e24-username'])) {echo 'value="'.esc_attr(self::$options['cst-e24-username']).'"'; } ?> /></td>
+					</tr>
+
+					<tr valign="top">
+						<th scope="row"><label for="cf-api">API Key</label></th>
+						<td><input type="text" name="options[cst-e24-api]" id="cf-api" <?php if (isset(self::$options['cst-e24-api'])) {echo 'value="'.esc_attr(self::$options['cst-e24-api']).'"'; } ?> /></td>
+					</tr>
+					<tr valign="top">
+						<th scope="row"><label for="cf-container">Container</label></th>
+						<td><input type="text" name="options[cst-e24-container]" id="cf-container" <?php if (isset(self::$options['cst-e24-container'])) {echo 'value="'.esc_attr(self::$options['cst-e24-container']).'"'; } ?> /></td>
+						<td><strong>If the container does not exist it will be created</strong></td>
+				</tbody>
+			</table>			
+			
 			<table class="form-table WebDAV">
 				<tbody>
 					<tr valign="top">

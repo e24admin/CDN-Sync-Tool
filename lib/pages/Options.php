@@ -66,6 +66,11 @@ class CST_Page_Options extends CST_Page {
 		parent::$options['cst-cf-username'] = get_option('cst-cf-username');
 		parent::$options['cst-cf-api'] = get_option('cst-cf-api');
 		parent::$options['cst-cf-container'] = get_option('cst-cf-container');
+		
+		parent::$options['cst-e24-username'] = get_option('cst-e24-username');
+		parent::$options['cst-e24-api'] = get_option('cst-e24-api');
+		parent::$options['cst-e24-container'] = get_option('cst-e24-container');
+		
 		parent::$options['cst-webdav-username'] = get_option('cst-webdav-username');
 		parent::$options['cst-webdav-password'] = get_option('cst-webdav-password');
 		parent::$options['cst-webdav-host'] = get_option('cst-webdav-host');
