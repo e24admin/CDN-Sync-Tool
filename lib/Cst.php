@@ -81,8 +81,8 @@ class Cst {
 		} else if ($this->connectionType == 'e24files') {
 			
 			require_once CST_DIR.'lib/api/S3.php';
-			$awsAccessKey = get_option('cst-s3-username');
-			$awsSecretKey = get_option('cst-s3-api');
+			$awsAccessKey = get_option('cst-e24-username');
+			$awsSecretKey = get_option('cst-e24-api');
 			$this->cdnConnection = new S3($awsAccessKey, $awsSecretKey, false, 'e24files.com');
 			
 			if (@$this->cdnConnection->listBuckets() === false) {
@@ -177,7 +177,7 @@ class Cst {
 		} else if ($this->connectionType == 'e24files') {
 			// Puts a file to the bucket
 			// putObjectFile(localName, bucketName, remoteName, ACL)
-			$bucketName = get_option('cst-cf-container');
+			$bucketName = get_option('cst-e24-container');
 			$buckets = $this->cdnConnection->listBuckets();
 			if (!in_array($bucketName, $buckets)) {
 				$this->cdnConnection->putBucket($bucketName);
