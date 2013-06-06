@@ -1,6 +1,6 @@
 === CDN Sync Tool ===
 Contributors: olliea95,Fubra,Backie,ray.viljoen
-Tags: CDN,content delivery network, sync, CDN sync, tool, Content, Upload, Files, Media, Optimization,cloudfront,cloud front,amazon s3,s3,cloudfiles,theme,MaxCDN,Origin Pull,Origin,Pull,files,speed,faster,accelerator,Page Load, zoom, webdav, web, dav
+Tags: CDN,content delivery network, sync, CDN sync, tool, Content, Upload, Files, Media, Optimization,cloudfront,cloud front,amazon s3,s3,cloudfiles,theme,MaxCDN,Origin Pull,Origin,Pull,files,speed,faster,accelerator,Page Load, zoom, webdav, web, dav, e24files
 Tested up to: 3.1
 Stable tag: 2.2.1
 Requires At Least: 3.0
@@ -105,6 +105,10 @@ The difference is that with Origin Pull the files are pulled from your web host 
 3. Go CDN Sync Tool and configure
 
 == CHANGELOG ==
+
+= 2.2.2 =
+
+* Added support for e24files.com (E24cloud.com cloud files service)
 
 = 2.2.1 =
 
